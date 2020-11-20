@@ -1,0 +1,240 @@
+> data <- c(1:7)
+> data
+[1] 1 2 3 4 5 6 7
+> sdata <- seq(1,10,2)
+> sdata
+[1] 1 3 5 7 9
+> rdata <- rep(1:2, 2)
+> rdata
+[1] 1 2 1 2
+> first <- c("축구, 야구, 수영")
+> second <- c("육상, 쇼트트랙")
+> union(first, second)
+[1] "축구, 야구, 수영" "육상, 쇼트트랙"  
+> setdiff(first, second)
+[1] "축구, 야구, 수영"
+> intersect(first, second)
+character(0)
+> data; sdata; rdata; first; second;
+[1] 1 2 3 4 5 6 7
+[1] 1 3 5 7 9
+[1] 1 2 1 2
+[1] "축구, 야구, 수영"
+[1] "육상, 쇼트트랙"
+> mdata <-matrix(c(1:8))
+> mdata
+     [,1]
+[1,]    1
+[2,]    2
+[3,]    3
+[4,]    4
+[5,]    5
+[6,]    6
+[7,]    7
+[8,]    8
+> mrow <- matrix(c(1:10), nrow = 2)
+> mrow
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    3    5    7    9
+[2,]    2    4    6    8   10
+> mbyrow <- matrix(c(1:10), nrow = 2, byrow = T)
+> mbyrow
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+> mrowcol <- matrix(c(1:10), nrow = 2, ncol = 2)
+> mrowcol
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> length(mrowcol)
+[1] 4
+> apply(mrowcol, 1, max)
+[1] 3 4
+> apply(mrowcol, 1, min)
+[1] 1 2
+> apply(mrowcol, 2, mean)
+[1] 1.5 3.5
+> colnames(mrowcol) <- c("one", "two")
+> mrowcol
+     one two
+[1,]   1   3
+[2,]   2   4
+> vec <- c(1:18)
+> arr  <- array(vec, c(3,2,3))
+> arr
+, , 1
+
+     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6
+
+, , 2
+
+     [,1] [,2]
+[1,]    7   10
+[2,]    8   11
+[3,]    9   12
+
+, , 3
+
+     [,1] [,2]
+[1,]   13   16
+[2,]   14   17
+[3,]   15   18
+
+> no <- c(1,2,3,4)
+> name <- c("twice", "mamamu", "sister", "me")
+> age <- c(21, 24, 29, 21)
+> family <- data.frame(NO = no, Name = name, Age = age)
+> family
+  NO   Name Age
+1  1  twice  21
+2  2 mamamu  24
+3  3 sister  29
+4  4     me  21
+> m <- matrix(c(1, "twice", 21, 2, "mamamu", 24, 3, "sister", 29, 4, "me", 21), 4, by = T)
+> family <- data.frame(m)
+> family
+  X1     X2 X3
+1  1  twice 21
+2  2 mamamu 24
+3  3 sister 29
+4  4     me 21
+> getwd()
+[1] "C:/Users/강대용/Documents"
+> setwd("C:/Rworkspace/rstudio-master/data")
+> getwd()
+[1] "C:/Rworkspace/rstudio-master/data"
+> family <- read.table("001family.txt", header = 1, sep = "")
+> family
+  번호 이름 나이
+1    1 star   13
+2    2  sun    7
+3    3 moon    3
+> family <- data.frame(x = seq(1,3,1), y = c(5:7), z=c('I', 'me', 'mine'))
+> family
+  x y    z
+1 1 5    I
+2 2 6   me
+3 3 7 mine
+> family$x
+[1] 1 2 3
+> family$y
+[1] 5 6 7
+> family$z
+[1] "I"    "me"   "mine"
+> apply(family[,c(1,2)], 2, sum)
+ x  y 
+ 6 18 
+> x1 <- subset(family, y >=6)
+> x1
+  x y    z
+2 2 6   me
+3 3 7 mine
+> height <- data.frame(no = c(1,2), height = c(120, 130))
+> weight <- data.frame(no = c(1,2), weight = c(50, 60))
+> family <- merge(height, weight, by.x = "no", by.y = "no")
+> family
+  no height weight
+1  1    120     50
+2  2    130     60
+> mode(family); class(family)
+[1] "list"
+[1] "data.frame"
+> list <- list("I", "me", "mine")
+> list
+[[1]]
+[1] "I"
+
+[[2]]
+[1] "me"
+
+[[3]]
+[1] "mine"
+
+> unlist <- unlist(list)
+> unlist
+[1] "I"    "me"   "mine"
+> family <- list(name = c("파이썬", "자바", "C언어"), age = c(13,7,3),
++  address = c("제주", "부산", "서울"),  gender = c("남", "여","여"), 
++  htype = c("아파트", "아파트", "단독주택") )
+> family
+$name
+[1] "파이썬" "자바"   "C언어" 
+
+$age
+[1] 13  7  3
+
+$address
+[1] "제주" "부산" "서울"
+
+$gender
+[1] "남" "여" "여"
+
+$htype
+[1] "아파트"   "아파트"   "단독주택"
+
+> family$htype[2]
+[1] "아파트"
+> family$htype[1] <- "오피스텔"
+> family$htype[1]
+[1] "오피스텔"
+> family$gender <- NULL
+> family
+$name
+[1] "파이썬" "자바"   "C언어" 
+
+$age
+[1] 13  7  3
+
+$address
+[1] "제주" "부산" "서울"
+
+$htype
+[1] "오피스텔" "아파트"   "단독주택"
+
+> multi_family = list(c1 = list("star", "sun", "moon"),
++ c2 = list("earth", "mars", "venus"), c3 = list("목성", "수성", "토성"))                     
+> multi_family
+$c1
+$c1[[1]]
+[1] "star"
+
+$c1[[2]]
+[1] "sun"
+
+$c1[[3]]
+[1] "moon"
+
+
+$c2
+$c2[[1]]
+[1] "earth"
+
+$c2[[2]]
+[1] "mars"
+
+$c2[[3]]
+[1] "venus"
+
+
+$c3
+$c3[[1]]
+[1] "목성"
+
+$c3[[2]]
+[1] "수성"
+
+$c3[[3]]
+[1] "토성"
+
+
+> do.call(cbind, multi_family)
+     c1     c2      c3    
+[1,] "star" "earth" "목성"
+[2,] "sun"  "mars"  "수성"
+[3,] "moon" "venus" "토성"
+> 
+> 
